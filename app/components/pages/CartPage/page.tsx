@@ -1,6 +1,6 @@
 "use client";
 import { useBooks } from "@/app/context/page";
-import { Trash2 } from "lucide-react";
+import { LoaderIcon, Trash2 } from "lucide-react";
 import { set } from "mongoose";
 import React, { useEffect, useState } from "react";
 
@@ -22,9 +22,13 @@ const CartPage = () => {
   return (
     <div className="max-w-275 mx-auto mt-30 font-oldstandard">
       {loading ? (
-        <div>
-          <p>loading</p>
-        </div>
+         <div className="flex justify-center items-center">
+                    <LoaderIcon
+                      role="status"
+                      aria-label="Loading"
+                      className="size-20 text-[#D3D3FF] mt-30"
+                    />
+                  </div>
       ) : (
         <div>
           {cart.length > 0 ? (

@@ -94,13 +94,13 @@ const BannerWrapper = () => {
         </Swiper>
       </div>
 
-      <div className="max-w-[1100px] mx-auto">
+      <div className="max-w-[1100px] mx-auto lg:px-0 px-2.5 ">
         <h1 className="text-3xl font-oldstandard mt-7">New Arrivals</h1>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
-          className="grid grid-cols-4 gap-1.5 "
+          className="grid grid-cols-2 lg:grid-cols-4 lg:gap-1.5 gap-3.5 max-sm:py-2 max-sm:space-y-2.5"
         >
           {fileteredBooks.map((book, id) => (
             <motion.div
@@ -109,29 +109,33 @@ const BannerWrapper = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: "easeOut", delay: id * 0.1 }}
-              className=" h-full p-3 w-full"
+              className=" h-full lg:p-3 w-full p-0"
             >
-              <div className="relative w-full h-65">
-                <div className="h-50 w-full">
+              <div className="relative h-110 w-full lg:h-65  max-sm:130">
+                <div className="lg:h-50 w-full h-85 max-sm:95 ">
                   <Link href={`/components/pages/Collections/${book._id}`}>
-                <img
+                <Image
                   src={
                     book.image?.startsWith("/9j/")
                       ? `data:image/jpeg;base64,${book.image}`
                       : book.image || "/placeholder.jpg"
                   }
                   alt={book.title}
-                  className="object-cover h-full w-full rounded-md"
+                  width={50}
+                  height={50}
+                  className="object-cover h-75 lg:h-full max-sm:h-97 w-full rounded-md"
                 />
               
-              <p className="font-oldstandard">{book.title}</p>
-              <h2 className="font-oldstandard">${book.price}</h2>
+              <p className="font-oldstandard lg:text-[17px] text-[18px] max-sm:text-[19px] max-sm:mt-1">{book.title}</p>
+              <h2 className="font-oldstandard max-sm:mt-1 font-bold lg:text-[17px] text-[18px] max-sm:text-[19px]">${book.price}</h2>
                    </Link>
                    </div>
                 </div>
               <button
                 onClick={() => handleCart(book._id)}
-                className="h-10
+                className="lg:h-10
+                max-sm:h-12
+                h-10
                 w-full
                 cursor-pointer
                 rounded-[10px]
@@ -142,6 +146,8 @@ const BannerWrapper = () => {
                 gap-5
                 items-center
                 hover:border-2 
+                max-sm:mt-12
+                lg:text-[17px] text-[18px] max-sm:text-[21px]
                 border-[#D3D3FF]
                 "
               >

@@ -1,3 +1,4 @@
+
 "use client";
 import { useBooks } from "@/app/context/page";
 import {
@@ -116,7 +117,7 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
   const average = getAverageRating(reviews ?? []);
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center justify-center sm:justify-start gap-1">
       {[1, 2, 3, 4, 5].map((star) => (
         <span
           key={star}
@@ -137,10 +138,10 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
   const items = books.find((bk) => String(bk._id) === params.CollectionsId);
 
   return (
-    <section className="max-w-275 mx-auto mt-30 font-oldstandard">
-      <div className="flex relative w-full">
-        <div className="flex-1 sticky top-30 h-[5%] px-6 py-4  w-full">
-          <div className="flex gap-6 ">
+    <section className="max-w-[1200px] mx-auto mt-20 sm:mt-20 md:mt-24 lg:mt-30 px-4 sm:px-6 lg:px-8 font-oldstandard">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 relative w-full">
+        <div className="flex-1 lg:sticky lg:top-30 h-auto lg:h-[5%] px-2 sm:px-6 py-4  w-full">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 ">
             <img
               src={
                 items?.image?.startsWith("/9j/")
@@ -148,20 +149,24 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                   : items?.image || "/placeholder.jpg"
               }
               alt="image"
-              className="h-60
-              w-40
+              className="h-48
+              w-32
+              sm:h-60
+              sm:w-40
+              mx-auto
+              sm:mx-0
               rounded-md
               object-cover"
             />
-            <div>
-              <h1 className="capitalize font-oldstandard text-2xl">
+            <div className="text-center sm:text-left">
+              <h1 className="capitalize font-oldstandard text-xl sm:text-2xl">
                 {items?.title}
               </h1>
               <span className="block font-oldstandard font-medium">
                 ${items?.price}
               </span>
               <StarDisplay reviews={items?.reviews ?? []} />
-              <div className="flex items-center space-x-5">
+              <div className="flex items-center justify-center sm:justify-start space-x-5">
                 <span>Qty:</span>
                 <div className="flex justify-between items-center gap-4 border h-8 w-32 px-2">
                   <button
@@ -180,30 +185,30 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                   </button>
                 </div>
               </div>
-              <div className="mt-15">
-                <button onClick={()=> handleCart(items?._id ?? '')} className="border h-10 w-50 rounded-md hover:bg-black hover:text-white cursor-pointer">
+              <div className="mt-8 sm:mt-15 flex justify-center sm:justify-start">
+                <button onClick={()=> handleCart(items?._id ?? '')} className="border h-10 w-full sm:w-50 rounded-md hover:bg-black hover:text-white cursor-pointer">
                   Add to cart
                 </button>
               </div>
             </div>
           </div>
-          <div className="mt-20 ">
-            <div className="rounded-2xl px-1 cursor-pointer w-full h-12 flex items-center gap-2.5  bg-[#F2F2F2]">
+          <div className="mt-12 sm:mt-16 md:mt-20 ">
+            <div className="rounded-2xl px-1 cursor-pointer w-full h-12 flex items-center gap-1 sm:gap-2.5  bg-[#F2F2F2]">
               <button
                 onClick={() => setSelected("Description")}
-                className={`cursor-pointer ${selected === "Description" ? " bg-[#D3D3FF] h-10 w-35 rounded-2xl transition-all duration-300" : "h-10 w-35  rounded-xl transition-all duration-300 "}`}
+                className={`cursor-pointer flex-1 text-xs sm:text-sm md:text-base ${selected === "Description" ? " bg-[#D3D3FF] h-10 rounded-2xl transition-all duration-300" : "h-10  rounded-xl transition-all duration-300 "}`}
               >
                 Description
               </button>
               <button
                 onClick={() => setSelected("Reviews")}
-                className={`cursor-pointer ${selected === "Reviews" ? " bg-[#D3D3FF] h-10 w-35 rounded-2xl transition-all duration-300" : "h-10 w-35 rounded-xl transition-all duration-300 "}`}
+                className={`cursor-pointer flex-1 text-xs sm:text-sm md:text-base ${selected === "Reviews" ? " bg-[#D3D3FF] h-10 rounded-2xl transition-all duration-300" : "h-10 rounded-xl transition-all duration-300 "}`}
               >
                 Reviews
               </button>
               <button
                 onClick={() => setSelected("About")}
-                className={`cursor-pointer ${selected === "About" ? " bg-[#D3D3FF] h-10 w-37 rounded-2xl transition-all duration-300" : "h-10 w-35 rounded-xl transition-all duration-300 "}`}
+                className={`cursor-pointer flex-1 text-xs sm:text-sm md:text-base ${selected === "About" ? " bg-[#D3D3FF] w-90 h-10 rounded-2xl transition-all duration-300" : "h-10 rounded-xl transition-all duration-300 w-90"}`}
               >
                 About the author
               </button>
@@ -215,6 +220,7 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.9, ease: "easeOut" }}
+                  className="text-sm sm:text-base"
                 >
                   {items?.description}
                 </motion.p>
@@ -225,6 +231,7 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.9, ease: "easeOut" }}
+                  className="text-sm sm:text-base"
                 >
                   {items?.bio}
                 </motion.p>
@@ -238,7 +245,7 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                   transition={{ duration: 0.9, ease: "easeOut" }}
                 >
                   {items?.reviews.map((rv) => (
-                    <div key={rv._id}>
+                    <div key={rv._id} className="mb-4 sm:mb-6 text-sm sm:text-base">
                       <p>{rv.reviewer}</p>
                       <p>{rv.comment}</p>
                       <div>
@@ -263,10 +270,10 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
           </div>
         </div>
 
-        <div className="flex-1 h-screen w-full">
-          <div className=" w-150 p-4">
+        <div className="w-full lg:flex-1 h-auto lg:h-screen">
+          <div className=" w-full lg:w-150 p-4">
             <div className="flex justify-between py-1.5 items-center border-b-2 border-[#D3D3FF] ">
-              <h1 className="font-black capitalize text-[18px]">
+              <h1 className="font-black capitalize text-base sm:text-[18px]">
                 why choose us
               </h1>
               <div>
@@ -294,18 +301,19 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                 initial={{ opacity: 0, x: -40 }}
                 animate={seen ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
+                className="text-sm sm:text-base"
               >
                 We are what we say we do
               </motion.p>
             </div>
           </div>
           <div>
-            <h1 className="text-center text-[16px]">
+            <h1 className="text-center text-sm sm:text-[16px] px-4">
               Kindly leave a review, so others can know how you feel about this
               book.
             </h1>
-            <div>
-              <form onSubmit={handleSubmit} className="grid gap-1.5 mt-3">
+            <div className="px-4 sm:px-0">
+              <form onSubmit={handleSubmit} className="grid gap-1.5 mt-3 w-full lg:w-150">
                 <div className="flex flex-col gap-1">
                   <label>Your name</label>
                   <input
@@ -315,8 +323,10 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                   focus:border-[#D3D3FF]
                   focus:border-2
                   rounded-md
-                   px-5
+                   px-3
+                   sm:px-5
                    h-12
+                   w-full
                    outline-0"
                     type="text"
                   />
@@ -349,8 +359,11 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                      focus:border-2
                      focus:border-[#D3D3FF]
                      rounded-md
-                     py-5
-                     px-5"
+                     py-3
+                     sm:py-5
+                     px-3
+                     sm:px-5
+                     w-full"
                     placeholder="leave a comment"
                     maxLength={150}
                   />

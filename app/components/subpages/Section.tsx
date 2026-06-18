@@ -13,9 +13,9 @@ const Section = () => {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
-        className=" bg-[#D3D3FF] h-90  mt-6"
+        className=" bg-[#D3D3FF] h-90 max-md:h-full  mt-6"
       >
-        <div className="max-w-[1100px] m-auto flex h-full">
+        <div className="max-w-[1100px] m-auto flex max-md:justify-center max-md:items-center h-full max-md:flex-col">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -24,17 +24,18 @@ const Section = () => {
             className="
         h-full
         py-14
+        max-md:py-6
         
         flex-1"
           >
-            <p className=" text-xl font-oldstandard w-125">
+            <p className=" lg:text-xl text-[14px] max-sm:text-[18px] font-oldstandard w-50 lg:w-125 max-sm:px-5 lg:px-0 px-3 max-md:w-full ">
               Books have always been the quietest way to change everything — how
               you think, how you see the world, how you understand the people
               around you. At Know More, we believe that the right book at the
               right time can open doors you didnt even know were closed.
             </p>
              <Link href='/components/pages/Collections/'>
-            <button className="border font-oldstandard text-xl h-12 w-70 mt-8 rounded-md hover:text-white cursor-pointer hover:bg-black hover">
+            <button className="border font-oldstandard text-xl h-12 w-70 mt-8 rounded-md hover:text-white cursor-pointer hover:bg-black hover max-sm:ml-5 max-sm:h-15 max-sm:text-[20px]">
               Browse collections
             </button>
             </Link>

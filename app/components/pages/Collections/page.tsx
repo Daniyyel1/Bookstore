@@ -1,3 +1,5 @@
+
+
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -81,9 +83,8 @@ const BookCard = ({ bk }: { bk: Books }) => {
 
   return (
    
-      <div>
-        <div>
-          <Link href={`/components/pages/Collections/${bk._id}`}>
+      <div className="flex flex-col w-full">
+        <Link href={`/components/pages/Collections/${bk._id}`} className="flex flex-col w-full">
           <img
             src={
               bk.image?.startsWith("/9j/")
@@ -91,23 +92,22 @@ const BookCard = ({ bk }: { bk: Books }) => {
                 : bk.image || "/placeholder.jpg"
             }
             alt={bk.title ?? "book cover"}
-            className="w-40 h-60 object-cover rounded-md"
+            className="w-full h-40 sm:h-48 md:h-52 lg:h-60 object-cover rounded-md"
           />
-          <h1 className="font-oldstandard capitalize text-[16px]">
+          <h1 className="font-oldstandard capitalize text-sm sm:text-[15px] md:text-[16px] mt-2 truncate">
             {bk.title}
           </h1>
-          <p className="font-oldstandard capitalize text-[16px]">
+          <p className="font-oldstandard capitalize text-xs sm:text-sm md:text-[16px] truncate">
             author: {bk.author}
           </p>
-          <span className="font-oldstandard block">${bk.price}</span>
-          <span className="capitalize font-oldstandard block text-[16px]">
+          <span className="font-oldstandard block text-sm sm:text-base">${bk.price}</span>
+          <span className="capitalize font-oldstandard block text-xs sm:text-sm md:text-[16px]">
             Rating: {bk.rating}/10
           </span>
-          </Link>
-        </div>
+        </Link>
         <button
           onClick={() => handleCart(bk._id)}
-          className="border font-oldstandard text-[18px] h-10 w-40 cursor-pointer mt-4 rounded-md"
+          className="border font-oldstandard text-sm sm:text-base h-9 sm:h-10 w-full cursor-pointer mt-3 rounded-md"
         >
           Add to cart
         </button>
@@ -126,21 +126,27 @@ const BookCarousel = ({ books }: { books: Books[] }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.9, ease: "easeOut" }}
-      className="mt-3"
+      className="mt-3 relative px-1 sm:px-2"
     >
       <Carousel setApi={setApi} opts={{ align: "start" }} className="w-full">
-        <CarouselContent className="flex gap-x-4 -ml-0">
+        <CarouselContent className="flex gap-x-2 sm:gap-x-3 md:gap-x-4 -ml-0">
           {books.map((bk, id) => (
             <CarouselItem
               key={id}
-              className="basis-1/6 p-4 rounded-md flex justify-center items-center"
+              className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 p-2 sm:p-3 rounded-md flex justify-center items-start"
             >
               <BookCard bk={bk} />
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious disabled={!canScrollPrev} />
-        <CarouselNext disabled={!canScrollNext} />
+        <CarouselPrevious
+          disabled={!canScrollPrev}
+          className="flex left-0 sm:-left-3 md:-left-4 lg:-left-5 top-1/2 -translate-y-1/2 z-10 h-8 w-8 sm:h-9 sm:w-9 bg-white border border-gray-300 shadow-md hover:bg-gray-100 disabled:opacity-0 disabled:pointer-events-none"
+        />
+        <CarouselNext
+          disabled={!canScrollNext}
+          className="flex right-0 sm:-right-3 md:-right-4 lg:-right-5 top-1/2 -translate-y-1/2 z-10 h-8 w-8 sm:h-9 sm:w-9 bg-white border border-gray-300 shadow-md hover:bg-gray-100 disabled:opacity-0 disabled:pointer-events-none"
+        />
       </Carousel>
     </motion.div>
   );
@@ -186,24 +192,24 @@ const BrowseCollections = () => {
 
   return (
     <section>
-      <div className="max-w-[1100px] mx-auto">
-        <div className="mt-30">
-          <div className="border focus-within:border-[#D3D3FF] border-gray-600 py-2.5 px-3 h-13 rounded-md w-full">
+      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mt-16 max-sm:mt-25 md:mt-24 lg:mt-30">
+          <div className="border focus-within:border-[#D3D3FF] border-gray-600 py-2.5 px-3 h-12 sm:h-13 rounded-md w-full">
             <input
               type="text"
               placeholder="Search all Books"
-              className="outline-0 w-full h-full"
+              className="outline-0 w-full h-full text-[16px] sm:text-base"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
             />
           </div>
 
-          <div className="flex justify-between items-center py-3.5 mt-10">
-            <h1 className="font-oldstandard text-3xl font-bold">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 py-3.5 mt-6 sm:mt-10">
+            <h1 className="font-oldstandard text-2xl sm:text-3xl font-bold">
               All collections
             </h1>
-            <div>
-              <h1 className="font-oldstandard text-[18px] font-bold">
+            <div className="w-full sm:w-auto">
+              <h1 className="font-oldstandard text-[16px] sm:text-[18px] font-bold mb-1 sm:mb-0">
                 Filter by:
               </h1>
               {/* <Select
@@ -224,7 +230,7 @@ const BrowseCollections = () => {
                   setCollections(value === "none" ? "" : value)
                 }
               >
-                <SelectTrigger className="w-[180px] h-10 rounded-lg border border-[#AFA9EC] bg-[#EEEDFE] px-3 text-[#3C3489] text-sm font-medium hover:bg-[#CECBF6] transition-colors focus:ring-2 focus:ring-[#7F77DD] focus:ring-offset-1">
+                <SelectTrigger className="w-full sm:w-[180px] h-10 rounded-lg border border-[#AFA9EC] bg-[#EEEDFE] px-3 text-[#3C3489] text-sm font-medium hover:bg-[#CECBF6] transition-colors focus:ring-2 focus:ring-[#7F77DD] focus:ring-offset-1">
                   <SelectValue placeholder="Select by genre" />
                 </SelectTrigger>
                 <SelectContent
@@ -271,19 +277,19 @@ const BrowseCollections = () => {
         {isSearching ? (
           // Search results grid
           <div>
-            <h2 className="font-oldstandard font-semibold text-xl mt-4 mb-3">
+            <h2 className="font-oldstandard font-semibold text-lg sm:text-xl mt-4 mb-3">
               Results for &quot;{searchValue || collections}&quot; (
               {searchResults.length || collections.length})
             </h2>
-            <div className="grid grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
               {isGenre.length > 0 ? (
                 isGenre.map((bk) => (
-                  <div key={bk._id} className="p-2">
+                  <div key={bk._id} className="p-1 sm:p-2">
                     <BookCard bk={bk} />
                   </div>
                 ))
               ) : (
-                <p className="col-span-6 font-oldstandard text-gray-500">
+                <p className="col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-5 xl:col-span-6 font-oldstandard text-gray-500">
                   No books found.
                 </p>
               )}

@@ -1,12 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { doCredentialLogin } from "./actions/page";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Image from "next/image";
 import SocialLogin from "./SocialLogin";
 import { Eye, EyeOff, LoaderIcon, Lock, Mail} from "lucide-react";
 import Link from "next/link";
+import { doCredentialLogin } from "./lib/action";
+
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);

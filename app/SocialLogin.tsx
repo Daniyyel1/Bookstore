@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { toast } from "sonner";
-import { doSocialLogin } from "./actions/page";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { doSocialLogin } from "./lib/action";
 
 const SocialLogin = () => {
   const providerMessages: Record<string, string> = {

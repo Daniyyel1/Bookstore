@@ -2,11 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, LoaderIcon, Lock, Mail, UserRound } from "lucide-react";
-import Image from "next/image";
-import use from "../public/use.jpg";
 import Link from "next/link";
 import SocialLogin from "./SocialLogin";
 import { toast } from "sonner";
+import Image from "next/image";
 
 const RegistrationForm = () => {
   const [loading, setLoading] = useState(false);
@@ -166,7 +165,7 @@ const RegistrationForm = () => {
           </div>
         </div>
         <div className="flex-1 h-100">
-          <Image src={use} alt="use" className="object-cover h-140 rounded-md" />
+          <Image src='/use.png' alt="use" className="object-cover h-140 rounded-md" width={150} height={150} />
         </div>
       </div>
     </section>

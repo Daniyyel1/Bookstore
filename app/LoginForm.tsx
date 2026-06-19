@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import Image from "next/image";
 import SocialLogin from "./SocialLogin";
 import { Eye, EyeOff, LoaderIcon, Lock, Mail, UserRound } from "lucide-react";
-import use from "../public/use.png";
 import Link from "next/link";
 
 const LoginForm = () => {
@@ -143,7 +142,7 @@ const LoginForm = () => {
           </div>
         </div>
         <div className="hidden md:flex flex-1 min-h-[400px] md:min-h-screen justify-center items-center bg-[url('/log.png')] bg-cover bg-center">
-           <Image className="h-64 w-64 lg:h-80 lg:w-80 xl:h-96 xl:w-96 object-cover" src={use} height={150} width={150} alt="book" />
+           <Image className=" lg:h-80 lg:w-80 xl:h-96 xl:w-96 object-cover" src='/use.png' height={150} width={150} alt="book" />
         </div>
       </div>
     </section>

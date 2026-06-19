@@ -7,10 +7,11 @@ interface RequestBody {
   name: string;
   email: string;
   password: string;
+  bio:string;
 }
 
 export const POST = async (request: Request) => {
-  const { name, email, password } = (await request.json()) as RequestBody;
+  const { name, email, password, bio } = (await request.json()) as RequestBody;
 
   console.log(name, email, password);
 
@@ -29,6 +30,7 @@ export const POST = async (request: Request) => {
     name,
     password: harshedPassword,
     email,
+    bio
   };
 
   // update db

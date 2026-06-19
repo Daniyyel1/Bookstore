@@ -25,6 +25,7 @@ const RegistrationForm = () => {
     const formData = new FormData(e.currentTarget);
     const name = formData.get("name");
     const email = formData.get("email");
+    const bio = formData.get("bio")
     const password = formData.get("password");
 
     if (!name || !email || !password) {
@@ -43,6 +44,7 @@ const RegistrationForm = () => {
           name,
           email,
           password,
+          bio
         }),
       });
       if (response.status === 201) {
@@ -100,6 +102,16 @@ const RegistrationForm = () => {
                 id="email"
                 className="outline-0 w-full"
                 placeholder="Enter your email"
+              />
+            </div>
+            <div className=" focus-within:bg-[#D3D3FF] focus-within:border-0 border  flex justify-center items-center gap-2 h-10 w-full px-3 py-1.5 rounded-md">
+              
+              <input
+                type="bio"
+                name="bio"
+                id="bio"
+                className="outline-0 w-full"
+                placeholder="Enter your bio"
               />
             </div>
             <div className=" focus-within:bg-[#D3D3FF] focus-within:border-0 border flex justify-center items-center gap-2 h-10 w-full px-3 py-1.5 rounded-md">
@@ -164,9 +176,9 @@ const RegistrationForm = () => {
             <Link className="font-bold" href="/Login">Sign in</Link>
           </div>
         </div>
-        <div className="flex-1 h-100">
-          <Image src='/use.png' alt="use" className="object-cover h-140 rounded-md" width={150} height={150} />
-        </div>
+       <div className="hidden md:flex flex-1 min-h-[400px] md:min-h-screen justify-center items-center bg-[url('/log.png')] bg-cover bg-center">
+                  <Image className=" lg:h-80 lg:w-80 xl:h-96 xl:w-96 object-cover" src='/use.png' height={150} width={150} alt="book" />
+               </div>
       </div>
     </section>
   );

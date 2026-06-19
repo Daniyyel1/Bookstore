@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -94,7 +95,7 @@ const Order = () => {
                     <div className="flex flex-col gap-2">
                       {od.items.map((item, idx) => (
                         <div key={idx} className="flex items-center gap-3">
-                          <img
+                          <Image width={50} height={50}
                             src={
                               item.book.image?.startsWith("/9j/")
                                 ? `data:image/jpeg;base64,${item.book.image}`

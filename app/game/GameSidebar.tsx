@@ -1,22 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Logout from "../Logout";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import UpdateProfile from "../components/subpages/UpdateProfile";
-import axios from "axios";
-import { toast } from "sonner";
 import Order from "../components/subpages/Order/page";
 
 type Props = {
   name?: string | null;
-  email?: string | null;
+  // email?: string | null;
   bio?: string | null;
   image?: string | null;
   id?: string | null;
 };
 
-const GameSidebar = ({ name, email, bio, image, id }: Props) => {
+const GameSidebar = ({ name, bio, id, image }: Props) => {
   const [selected, setSelected] = useState("Home");
 
   return (

@@ -15,7 +15,6 @@ import Link from "next/link";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -23,6 +22,7 @@ import {
 import { useBooks } from "@/app/context/page";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface Review {
   _id: string;
@@ -71,8 +71,6 @@ function useCarouselScrollState() {
 
 // Reusable book card
 const BookCard = ({ bk }: { bk: Books }) => {
-  const [rating, setRating] = useState<number >(0);
-  const stars = [1, 2, 3, 4, 5];
 
   const { addToCart } = useBooks();
   const { data: session } = useSession();
@@ -128,7 +126,7 @@ const BookCard = ({ bk }: { bk: Books }) => {
         href={`/components/pages/Collections/${bk._id}`}
         className="flex flex-col w-full"
       >
-        <img
+        <Image width={50} height={50}
           src={
             bk.image?.startsWith("/9j/")
               ? `data:image/jpeg;base64,${bk.image}`

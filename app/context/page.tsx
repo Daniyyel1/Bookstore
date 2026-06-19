@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { toast } from "sonner";
 import { useSession } from "next-auth/react"; // ✅ add this
 
 interface CartItem {

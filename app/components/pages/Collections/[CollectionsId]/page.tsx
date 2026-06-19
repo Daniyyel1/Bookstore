@@ -1,8 +1,6 @@
 "use client";
 import { useBooks } from "@/app/context/page";
 import {
-  ArrowDown,
-  ArrowUp,
   ChevronDown,
   ChevronUp,
   LoaderIcon,
@@ -15,6 +13,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 interface postReviewProps {
   id: string;
@@ -150,7 +149,7 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 relative w-full">
         <div className="flex-1 lg:sticky lg:top-30 h-auto lg:h-[5%] px-2 sm:px-6 py-4  w-full">
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 ">
-            <img
+            <Image width={50} height={50}
               src={
                 items?.image?.startsWith("/9j/")
                   ? `data:image/jpeg;base64,${items?.image}`

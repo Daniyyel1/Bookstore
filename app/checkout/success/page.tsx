@@ -23,6 +23,7 @@ export default function CheckoutSuccess() {
 
         setStatus(response.data.success ? "success" : "failed");
       } catch (e) {
+        console.error(e)
         setStatus("failed");
       }
     };

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import know from "../../../../public/know.svg";
 import { BsHandbag } from "react-icons/bs";
-import { ShoppingCart } from "lucide-react";
 import { useBooks } from "@/app/context/page";
 import { useSession } from "next-auth/react";
 import { useState } from "react";

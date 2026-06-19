@@ -1,5 +1,3 @@
-
-
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -26,6 +24,14 @@ import { useBooks } from "@/app/context/page";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
+interface Review {
+  _id: string;
+  reviewer: string;
+  comment: string;
+  rating: number;
+}
+
+
 interface Books {
   _id: string;
   title: string;
@@ -33,7 +39,10 @@ interface Books {
   price: number;
   image: string;
   rating: number;
-  genres: string | string[];
+  genres: string;
+  bio: string;
+  description: string;
+  reviews: Review[];
 }
 
 // Reusable hook for carousel scroll state
@@ -62,6 +71,9 @@ function useCarouselScrollState() {
 
 // Reusable book card
 const BookCard = ({ bk }: { bk: Books }) => {
+  const [rating, setRating] = useState<number >(0);
+  const stars = [1, 2, 3, 4, 5];
+
   const { addToCart } = useBooks();
   const { data: session } = useSession();
 
@@ -81,38 +93,70 @@ const BookCard = ({ bk }: { bk: Books }) => {
     }
   };
 
-  return (
-   
-      <div className="flex flex-col w-full">
-        <Link href={`/components/pages/Collections/${bk._id}`} className="flex flex-col w-full">
-          <img
-            src={
-              bk.image?.startsWith("/9j/")
-                ? `data:image/jpeg;base64,${bk.image}`
-                : bk.image || "/placeholder.jpg"
+  const getAverageRating = (reviews: { rating: number }[]) => {
+    if (!reviews || reviews.length === 0) return 0;
+    const total = reviews.reduce((sum, rv) => sum + rv.rating, 0);
+    return Math.round(total / reviews.length); // rounds to nearest whole star
+  };
+
+  const StarDisplay = ({ reviews }: { reviews: { rating: number }[] }) => {
+    const average = getAverageRating(reviews ?? []);
+
+    return (
+      <div className="flex items-center justify-center sm:justify-start gap-1">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span
+            key={star}
+            className={
+              star <= average
+                ? "text-[#FBBF24] text-xl"
+                : "text-[#D1D5DB] text-xl"
             }
-            alt={bk.title ?? "book cover"}
-            className="w-full h-40 sm:h-48 md:h-52 lg:h-60 object-cover rounded-md"
-          />
-          <h1 className="font-oldstandard capitalize text-sm sm:text-[15px] md:text-[16px] mt-2 truncate">
-            {bk.title}
-          </h1>
-          <p className="font-oldstandard capitalize text-xs sm:text-sm md:text-[16px] truncate">
-            author: {bk.author}
-          </p>
-          <span className="font-oldstandard block text-sm sm:text-base">${bk.price}</span>
-          <span className="capitalize font-oldstandard block text-xs sm:text-sm md:text-[16px]">
-            Rating: {bk.rating}/10
+          >
+            ★
           </span>
-        </Link>
-        <button
-          onClick={() => handleCart(bk._id)}
-          className="border font-oldstandard text-sm sm:text-base h-9 sm:h-10 w-full cursor-pointer mt-3 rounded-md"
-        >
-          Add to cart
-        </button>
+        ))}
+        <span className="text-sm text-gray-500">({reviews.length})</span>{" "}
+        {/* review count */}
       </div>
-    
+    );
+  };
+
+  return (
+    <div className="flex flex-col w-full">
+      <Link
+        href={`/components/pages/Collections/${bk._id}`}
+        className="flex flex-col w-full"
+      >
+        <img
+          src={
+            bk.image?.startsWith("/9j/")
+              ? `data:image/jpeg;base64,${bk.image}`
+              : bk.image || "/placeholder.jpg"
+          }
+          alt={bk.title ?? "book cover"}
+          className="w-full h-40 sm:h-48 md:h-52 lg:h-60 object-cover rounded-md"
+        />
+        <h1 className="font-oldstandard capitalize text-sm sm:text-[15px] md:text-[16px] mt-2 truncate">
+          {bk.title}
+        </h1>
+        <p className="font-oldstandard capitalize text-xs sm:text-sm md:text-[16px] truncate">
+          author: {bk.author}
+        </p>
+        <span className="font-oldstandard block text-sm sm:text-base">
+          ₦{bk.price}
+        </span>
+        <span className="capitalize font-oldstandard block text-xs sm:text-sm md:text-[16px]">
+            <StarDisplay reviews={bk?.reviews ?? []} />
+        </span>
+      </Link>
+      <button
+        onClick={() => handleCart(bk._id)}
+        className="border font-oldstandard text-sm sm:text-base h-9 sm:h-10 w-full cursor-pointer mt-3 rounded-md"
+      >
+        Add to cart
+      </button>
+    </div>
   );
 };
 

@@ -49,7 +49,7 @@ const CheckContext = ({ children }: { children: React.ReactNode }) => {
   const [books, setBooks] = useState<Books[]> ([]);
   const [selected, setSelected] = useState("Home");
   const [cart, setCart] = useState<CartItem[]>([]);
-  const { data: session } = useSession(); // ✅ add this
+  const { data: session } = useSession();
 
   // books — always fetch regardless of session
   const fetchBooks = async () => {

@@ -67,7 +67,7 @@ const NewsLetter = () => {
           <h1 className="text-center font-oldstandard text-4xl">
             Join our Newsletter
           </h1>
-          <p className="text-center font-oldstandard text-[20px]">
+          <p className="text-center font-oldstandard lg:text-[20px] md:text-[18px] max-sm:text-[16px]">
             Stay up to date with new arrivals and so much more.
           </p>
           <div className="flex justify-center items-center ">
@@ -85,7 +85,7 @@ const NewsLetter = () => {
                 />
                 <button
                   type="submit"
-                  className="h-15 max-sm:flex max-sm:justify-center max-sm:items-center max-sm:ml-9 w-60 max-sm:w-70 border text-white cursor-pointer bg-[black] text-xl hover:border hover:bg-transparent hover:text-black"
+                  className="h-15 max-sm:flex max-sm:justify-center max-sm:items-center max-sm:ml-9 w-60 max-sm:w-70  text-white cursor-pointer bg-[black] text-xl hover:border hover:bg-transparent hover:text-black"
                 >
                   {loading ? (
                   <div className="flex justify-center items-center">

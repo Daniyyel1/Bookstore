@@ -18,6 +18,9 @@ export default function CheckoutSuccess() {
         const response = await axios.get(`/api/verify-payment?reference=${reference}`, {
           withCredentials: true,
         });
+
+  
+
         setStatus(response.data.success ? "success" : "failed");
       } catch (e) {
         setStatus("failed");
@@ -34,7 +37,7 @@ export default function CheckoutSuccess() {
         <>
           <h1 className="text-2xl font-bold">Payment Successful!</h1>
           <p className="text-gray-500">Thank you for your order.</p>
-          <Link href="/orders" className="underline">View your orders</Link>
+          <Link href="/components/subpages/Order" className="underline">View your orders</Link>
         </>
       )}
       {status === "failed" && <h1 className="text-2xl font-bold">Payment verification failed</h1>}

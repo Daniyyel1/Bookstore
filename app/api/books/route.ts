@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-
-
 import { dbConnect } from "@/app/lib/mongo";
 import bookModel from "@/app/model/book-model";
 

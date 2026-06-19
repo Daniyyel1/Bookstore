@@ -9,12 +9,12 @@ interface RequestBody {
 }
 
 interface Params {
-  params: Promise<{ id: string }>; // ✅ Promise
+  params: Promise<{ id: string }>;
 }
 
 
 export const POST = async (request: Request, { params }: Params) => {
-     const { id } = await params; // ✅ await it
+     const { id } = await params; //
     const { reviewer, comment, rating } = (await request.json()) as RequestBody;
   
   await dbConnect();
@@ -25,7 +25,7 @@ export const POST = async (request: Request, { params }: Params) => {
       { $push: { reviews: { reviewer, comment, rating } } },
       { new: true },
     );
-      console.log("updated book:", addReview); // ✅ check what comes back
+      console.log("updated book:", addReview); // 
   console.log("reviews after update:", addReview?.reviews)
      
       if (!addReview) {

@@ -59,12 +59,18 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
     }
   };
 
+
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!comment || !reviewer || rating === 0) {
       toast.error("Fill out the fields and select a rating");
       return;
+    }
+
+    if(!session){
+      return router.push('/Login')
     }
 
     setLoading(true);
@@ -165,7 +171,7 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                 {items?.title}
               </h1>
               <span className="block font-oldstandard font-medium">
-                ${items?.price}
+                ₦{items?.price}
               </span>
               <StarDisplay reviews={items?.reviews ?? []} />
               <div className="flex items-center justify-center sm:justify-start space-x-5">

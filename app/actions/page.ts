@@ -1,6 +1,4 @@
 "use server";
-
-import { toast } from "sonner";
 import { signIn, signOut, } from "../auth";
 import { AuthError } from "next-auth";
 

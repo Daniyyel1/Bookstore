@@ -2,7 +2,14 @@ import { dbConnect } from "@/app/lib/mongo";
 import CartModel from "@/app/model/cart-model";
 import { NextResponse } from "next/server";
 import { auth } from "@/app/auth";
-import { redirect } from "next/navigation";
+
+interface CartItem {
+  book: string; // or Types.ObjectId if you're using mongoose types directly
+  quantity: number;
+  price: number;
+  // add any other fields your cart item actually has
+}
+
 
 
 // GET — fetch cart for logged in user
@@ -53,7 +60,7 @@ export const POST = async (request: Request) => {
   } else {
     // check if book already in cart
     const existingItem = cart.items.find(
-      (item: any) => String(item.book) === bookId,
+      (item: CartItem) => String(item.book) === bookId,
     );
 
     if (existingItem) {

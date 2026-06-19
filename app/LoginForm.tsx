@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Image from "next/image";
 import SocialLogin from "./SocialLogin";
-import { Eye, EyeOff, LoaderIcon, Lock, Mail, UserRound } from "lucide-react";
+import { Eye, EyeOff, LoaderIcon, Lock, Mail} from "lucide-react";
 import Link from "next/link";
 
 const LoginForm = () => {

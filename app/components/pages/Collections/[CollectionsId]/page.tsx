@@ -15,11 +15,8 @@ import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 
-interface postReviewProps {
-  id: string;
-}
 
-const CollectionDetailsPage = ({ id }: postReviewProps) => {
+const CollectionDetailsPage = () => {
   const { books, refetchBooks } = useBooks();
   const [seen, setSeen] = useState(false);
   const [quantity, setQuantity] = useState(1);

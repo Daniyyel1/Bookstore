@@ -7,7 +7,7 @@ import { LoaderIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface UpdateProfileProps {
-  id: string; // 
+  id: string;
 }
 
 const UpdateProfile = ({ id }: UpdateProfileProps) => {
@@ -45,7 +45,7 @@ const UpdateProfile = ({ id }: UpdateProfileProps) => {
       } else {
         toast.error("cannot update user info");
       }
-      console.log("status:", response.status); // ✅ check what status is coming back
+      console.log("status:", response.status)
       const data = await response.json();
       console.log("response data:", data);
     } catch (e) {

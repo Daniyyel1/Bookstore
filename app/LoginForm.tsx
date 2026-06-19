@@ -58,50 +58,50 @@ const LoginForm = () => {
   }, [errorMessage]);
 
   return (
-    <section>
-      <div className="flex gap-7 items-center justify-center h-full ">
-        <div className="flex-1 px-6 py-8 h-90 items-center">
-          <h1 className="font-baloo text-4xl font-extrabold text-center">
+    <section className="min-h-screen">
+      <div className="flex flex-col md:flex-row items-stretch justify-center min-h-screen">
+        <div className="flex-1 px-4 sm:px-8 lg:px-12 py-10 flex flex-col justify-center max-w-xl w-full mx-auto md:mx-0">
+          <h1 className="font-baloo text-3xl sm:text-4xl font-extrabold text-center">
             Login
           </h1>
-          <p className="text-center">Log in your account</p>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6 mt-6">
+          <p className="text-center mt-1 text-sm sm:text-base">Log in your account</p>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-6 w-full">
             {errorMessage && (
               <p className="text-red-500 text-sm text-center">{errorMessage}</p>
             )}
-            <div className=" focus-within:border-2 border focus-within:border-[#D3D3FF] flex justify-center items-center gap-2 h-10 w-full px-3 py-1.5 rounded-md">
-              <Mail />
+            <div className="focus-within:border-2 border focus-within:border-[#D3D3FF] flex justify-center items-center gap-2 h-11 sm:h-12 w-full px-3 py-1.5 rounded-md">
+              <Mail className="shrink-0 size-5" />
               <input
                 type="email"
                 name="email"
                 id="email"
-                className="outline-0 w-full"
+                className="outline-0 w-full text-[17px] sm:text-[16px]"
                 placeholder="Enter your email"
               />
             </div>
-            <div className=" focus-within:border-[#D3D3FF] border focus-within:border-2 flex justify-center items-center gap-2 h-10 w-full px-3 py-1.5 rounded-md">
-              <Lock />
+            <div className="focus-within:border-[#D3D3FF] border focus-within:border-2 flex justify-center items-center gap-2 h-11 sm:h-12 w-full px-3 py-1.5 rounded-md">
+              <Lock className="shrink-0 size-5" />
               <input
                 type={isShowPassword ? "text" : "password"}
                 name="password"
                 id="password"
-                className="outline-0 w-full"
+                className="outline-0 w-full text-[17px] sm:text-[16px]"
                 placeholder="Enter a strong password"
               />
-              <div className="flex justify-end items-center">
+              <div className="flex justify-end items-center shrink-0">
                 {isShowPassword ? (
-                  <EyeOff onClick={isShown} />
+                  <EyeOff onClick={isShown} className="size-5 cursor-pointer" />
                 ) : (
-                  <Eye onClick={isShown} />
+                  <Eye onClick={isShown} className="size-5 cursor-pointer" />
                 )}
               </div>
             </div>
             <div>
               <button
                 type="submit"
-                className="h-15 rounded-xl
+                className="h-12 sm:h-14 rounded-xl
                      font-oldstandard
-                     text-xl
+                     text-base sm:text-xl
                      w-full
                      border-2
                      bg-[black]
@@ -110,6 +110,7 @@ const LoginForm = () => {
                      hover:border-2
                      hover:bg-transparent
                      hover:text-black
+                     transition-colors
                      "
               >
                 {loading ? (
@@ -126,23 +127,23 @@ const LoginForm = () => {
               </button>
             </div>
           </form>
-          <div className="py-7">
-            <div className="flex justify-center items-center gap-2">
-              <div className="border w-50"></div>
-              <p>or continue using</p>
-              <div className="border w-50"></div>
+          <div className="py-6">
+            <div className="flex justify-center items-center gap-2 w-full">
+              <div className="border flex-1 max-w-[120px]"></div>
+              <p className="text-sm sm:text-base whitespace-nowrap">or continue using</p>
+              <div className="border flex-1 max-w-[120px]"></div>
             </div>
             <div className="mt-5">
               <SocialLogin />
             </div>
           </div>
-          <div className="flex gap-1.5 justify-center items-center">
+          <div className="flex gap-1.5 justify-center items-center text-sm sm:text-base">
             <p>Do not have an account?</p>
-            <Link className=" font-bold" href="/Register">Sign up</Link>
+            <Link className="font-bold" href="/Register">Sign up</Link>
           </div>
         </div>
-        <div className="flex-1 h-screen flex justify-center items-center  bg-[url('/log.png')]">
-           <Image className="h-90 w-90 object-cover" src={use} height={150} width={150} alt="book"></Image>
+        <div className="hidden md:flex flex-1 min-h-[400px] md:min-h-screen justify-center items-center bg-[url('/log.png')] bg-cover bg-center">
+           <Image className="h-64 w-64 lg:h-80 lg:w-80 xl:h-96 xl:w-96 object-cover" src={use} height={150} width={150} alt="book" />
         </div>
       </div>
     </section>

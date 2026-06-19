@@ -1,10 +1,13 @@
 // GameSidebar.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logout from "../Logout";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import UpdateProfile from "../components/subpages/UpdateProfile";
+import axios from "axios";
+import { toast } from "sonner";
+import Order from "../components/subpages/Order";
 
 type Props = {
   name?: string | null;
@@ -17,6 +20,7 @@ type Props = {
 const GameSidebar = ({ name, email, bio, image, id }: Props) => {
   const [selected, setSelected] = useState("Home");
   
+
 
   return (
     <section className="">
@@ -98,6 +102,14 @@ const GameSidebar = ({ name, email, bio, image, id }: Props) => {
               <UpdateProfile id={id ?? ''}/>
             )}
           </div>
+
+           <div>
+               {selected === 'Order History' && (
+                <div>
+                    <Order />
+                </div>
+               )}
+           </div>
         </div>
       </div>
     </section>

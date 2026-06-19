@@ -1,15 +1,33 @@
 "use client";
 import { useBooks } from "@/app/context/page";
 import { LoaderIcon, Trash2 } from "lucide-react";
-import { set } from "mongoose";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const CartPage = () => {
   const { cart, removeFromCart, updateQuantity } = useBooks();
 
   const [loading, setLoading] = useState(true);
+  const [isCheckOut, setIsCheckOut] = useState(false);
 
   const total = cart.reduce((sum, ct) => sum + ct.book.price * ct.quantity, 0);
+
+  const handleCheckout = async () => {
+    setIsCheckOut(true);
+
+    try {
+      const response = await axios.post(
+        "/api/checkout",
+        {},
+        { withCredentials: true },
+      );
+      window.location.href = response.data.url; // redirect to Paystack
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsCheckOut(false);
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,13 +40,13 @@ const CartPage = () => {
   return (
     <div className="max-w-275 mx-auto mt-30 font-oldstandard">
       {loading ? (
-         <div className="flex justify-center items-center">
-                    <LoaderIcon
-                      role="status"
-                      aria-label="Loading"
-                      className="size-20 text-[#D3D3FF] mt-30"
-                    />
-                  </div>
+        <div className="flex justify-center items-center">
+          <LoaderIcon
+            role="status"
+            aria-label="Loading"
+            className="size-20 text-[#D3D3FF] mt-30"
+          />
+        </div>
       ) : (
         <div>
           {cart.length > 0 ? (
@@ -91,8 +109,21 @@ const CartPage = () => {
               </div>
 
               <div className="flex justify-end mt-4">
-                <button className="h-12 w-40 border rounded-md hover:bg-black hover:text-white cursor-pointer">
-                  Checkout
+                <button
+                  onClick={handleCheckout}
+                  className="h-12 w-40 border rounded-md hover:bg-black hover:text-white cursor-pointer"
+                >
+                  {isCheckOut ? 
+                   <div className="flex justify-center items-center">
+                    <LoaderIcon
+                      role="status"
+                      aria-label="Loading"
+                      className="size-6 text-[#D3D3FF]"
+                    />
+                    </div>
+                  : 
+                    "Checkout"
+                  }
                 </button>
               </div>
             </div>

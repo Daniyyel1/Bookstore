@@ -1,4 +1,3 @@
-
 "use client";
 import { useBooks } from "@/app/context/page";
 import {
@@ -17,8 +16,6 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 
-
-
 interface postReviewProps {
   id: string;
 }
@@ -30,12 +27,12 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
   const [selected, setSelected] = useState("Description");
   const [reviewer, setReviewer] = useState("");
   const [comment, setComment] = useState("");
-  const [rating, setRating] = useState<number>(0);
+  const [rating, setRating] = useState<number >(0);
   const [hover, setHover] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const { addToCart } = useBooks();
-    const { data: session } = useSession(); // ✅ client-side session
-  
+  const { data: session } = useSession(); // ✅ client-side session
+
   //  const params = useParams<{ CollectionsId: string }>()
 
   const stars = [1, 2, 3, 4, 5];
@@ -48,19 +45,19 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
     setSeen(!seen);
   };
 
-   const handleCart = async (bookId: string) => {
-      try {
-        if (!session) {
-          toast.error("You need to login to add product to cart");
-          router.push("/Login");
-          return;
-        }
-        await addToCart(bookId, quantity);
-        toast.success("Item added to cart");
-      } catch (e) {
-        console.error(e);
+  const handleCart = async (bookId: string) => {
+    try {
+      if (!session) {
+        toast.error("You need to login to add product to cart");
+        router.push("/Login");
+        return;
       }
-    };
+      await addToCart(bookId, quantity);
+      toast.success("Item added to cart");
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,29 +104,34 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
     setReviewer("");
   };
 
-   const getAverageRating = (reviews: { rating: number }[]) => {
-  if (!reviews || reviews.length === 0) return 0;
-  const total = reviews.reduce((sum, rv) => sum + rv.rating, 0);
-  return Math.round(total / reviews.length); // rounds to nearest whole star
-};
+  const getAverageRating = (reviews: { rating: number }[]) => {
+    if (!reviews || reviews.length === 0) return 0;
+    const total = reviews.reduce((sum, rv) => sum + rv.rating, 0);
+    return Math.round(total / reviews.length); // rounds to nearest whole star
+  };
 
- const StarDisplay = ({ reviews }: { reviews: { rating: number }[] }) => {
-  const average = getAverageRating(reviews ?? []);
+  const StarDisplay = ({ reviews }: { reviews: { rating: number }[] }) => {
+    const average = getAverageRating(reviews ?? []);
 
-  return (
-    <div className="flex items-center justify-center sm:justify-start gap-1">
-      {[1, 2, 3, 4, 5].map((star) => (
-        <span
-          key={star}
-          className={star <= average ? "text-[#FBBF24] text-xl" : "text-[#D1D5DB] text-xl"}
-        >
-          ★
-        </span>
-      ))}
-      <span className="text-sm text-gray-500">({reviews.length})</span> {/* review count */}
-    </div>
-  );
-};
+    return (
+      <div className="flex items-center justify-center sm:justify-start gap-1">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span
+            key={star}
+            className={
+              star <= average
+                ? "text-[#FBBF24] text-xl"
+                : "text-[#D1D5DB] text-xl"
+            }
+          >
+            ★
+          </span>
+        ))}
+        <span className="text-sm text-gray-500">({reviews.length})</span>{" "}
+        {/* review count */}
+      </div>
+    );
+  };
 
   //    const items = books.find(
   //   (book) => book.title === decodeURIComponent(params.CollectionsId)
@@ -186,7 +188,10 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                 </div>
               </div>
               <div className="mt-8 sm:mt-15 flex justify-center sm:justify-start">
-                <button onClick={()=> handleCart(items?._id ?? '')} className="border h-10 w-full sm:w-50 rounded-md hover:bg-black hover:text-white cursor-pointer">
+                <button
+                  onClick={() => handleCart(items?._id ?? "")}
+                  className="border h-10 w-full sm:w-50 rounded-md hover:bg-black hover:text-white cursor-pointer"
+                >
                   Add to cart
                 </button>
               </div>
@@ -244,8 +249,12 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.9, ease: "easeOut" }}
                 >
-                  {items?.reviews.map((rv) => (
-                    <div key={rv._id} className="mb-4 sm:mb-6 text-sm sm:text-base">
+                     {
+                      (items?.reviews.length ?? 0) > 0 ? (<div>{items?.reviews.map((rv) => (
+                    <div
+                      key={rv._id}
+                      className="mb-4 sm:mb-6 text-sm sm:text-base"
+                    >
                       <p>{rv.reviewer}</p>
                       <p>{rv.comment}</p>
                       <div>
@@ -263,7 +272,8 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
                         ))}
                       </div>
                     </div>
-                  ))}
+                  ))}</div>) : (<div><p>no reviews yet, be the first to comment</p></div>)
+                     }
                 </motion.div>
               )}
             </div>
@@ -313,7 +323,10 @@ const CollectionDetailsPage = ({ id }: postReviewProps) => {
               book.
             </h1>
             <div className="px-4 sm:px-0">
-              <form onSubmit={handleSubmit} className="grid gap-1.5 mt-3 w-full lg:w-150">
+              <form
+                onSubmit={handleSubmit}
+                className="grid gap-1.5 mt-3 w-full lg:w-150"
+              >
                 <div className="flex flex-col gap-1">
                   <label>Your name</label>
                   <input

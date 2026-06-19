@@ -1,6 +1,6 @@
 import React from 'react'
-import { doLogOut } from './actions/page'
 import { LogOut } from 'lucide-react'
+import { doLogOut } from './lib/action'
 
 const Logout = () => {
   return (

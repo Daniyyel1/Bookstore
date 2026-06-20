@@ -69,7 +69,7 @@ const CartPage = () => {
                   <div className="flex-1 min-w-[140px]">
                     <h2 className="capitalize">{ct.book.title}</h2>
                     <p className="text-sm text-gray-500">{ct.book.author}</p>
-                    <span>${ct.book.price}</span>
+                    <span>₦{ct.book.price}</span>
                   </div>
 
                   {/* quantity controls */}

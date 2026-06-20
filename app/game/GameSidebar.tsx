@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import UpdateProfile from "../components/subpages/UpdateProfile";
 import Order from "../components/subpages/Order/page";
+import Link from "next/link";
+import { Home } from "lucide-react";
 
 type Props = {
   name?: string | null;
@@ -41,6 +43,9 @@ const GameSidebar = ({ name, bio, id, image }: Props) => {
               Order History
             </button>
             <Logout />
+            <div className="absolute bottom-0 ">
+               <Link className="flex text-[23px] hover:font-bold hover:text-[#D3D3FF] justify-center items-center gap-2" href='/'><Home />HomePage</Link>
+            </div>
           </div>
         </div>
 

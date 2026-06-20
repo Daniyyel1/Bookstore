@@ -89,7 +89,7 @@ const Order = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 font-medium">
-                    ${od.total.toFixed(2)}
+                    ₦{od.total.toFixed(2)}
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex flex-col gap-2">
@@ -109,7 +109,7 @@ const Order = () => {
                               {item.book.title}
                             </p>
                             <p className="text-xs text-gray-500">
-                              Qty: {item.quantity} · $
+                              Qty: {item.quantity} · ₦
                               {(item.price * item.quantity).toFixed(2)}
                             </p>
                           </div>

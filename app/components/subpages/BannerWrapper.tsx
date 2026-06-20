@@ -126,7 +126,7 @@ const BannerWrapper = () => {
                 />
               
               <p className="font-oldstandard lg:text-[17px] text-[18px] max-sm:text-[19px] max-sm:mt-1">{book.title}</p>
-              <h2 className="font-oldstandard max-sm:mt-1 font-bold lg:text-[17px] text-[18px] max-sm:text-[19px]">${book.price}</h2>
+              <h2 className="font-oldstandard max-sm:mt-1 font-bold lg:text-[17px] text-[18px] max-sm:text-[19px]">₦{book.price}</h2>
                    </Link>
                    </div>
                 </div>

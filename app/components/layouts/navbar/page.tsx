@@ -81,7 +81,7 @@ const Navbar = () => {
               }`}
             >
               <div
-                className={`flex items-center gap-1 ${label === "Profile" ? " h-13  bg-[#D3D3FF] w-full rounded-md flex justify-center items-center" : ""}`}
+                className={`flex items-center gap-1 ${label === "Profile" ? " h-13  bg-[#D3D3FF] w-60 rounded-md flex justify-center items-center" : ""}`}
               >
                 {label === "Profile" ? <div>{session?.user.name}</div> : label}
 

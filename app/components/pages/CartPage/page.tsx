@@ -90,7 +90,7 @@ const CartPage = () => {
                   </div>
 
                   <span className="w-full sm:w-20 text-right">
-                    ${(ct.book.price * ct.quantity).toFixed(2)}
+                    ₦{(ct.book.price * ct.quantity).toFixed(2)}
                   </span>
 
                   {/* remove button */}

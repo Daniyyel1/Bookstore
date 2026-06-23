@@ -118,7 +118,7 @@ const LoginForm = () => {
                     <LoaderIcon
                       role="status"
                       aria-label="Loading"
-                      className="size-4"
+                      className="size-4 animate-spin"
                     />
                   </div>
                 ) : (

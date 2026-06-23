@@ -51,7 +51,16 @@ const RegistrationForm = () => {
         alert("user created successfully");
         router.push("/");
       } else {
-        setErrorMessage("fail to create user account");
+        const data = await response.json().catch(() => null);
+        const message = String(data?.message || "");
+
+        if (response.status === 409) {
+          toast.error(
+            message || "An account with these details already exists.",
+          );
+        } else {
+          setErrorMessage(message || "fail to create user account");
+        }
       }
     } catch (e) {
       console.error(e);
@@ -73,8 +82,13 @@ const RegistrationForm = () => {
           <h1 className="font-baloo text-3xl sm:text-4xl font-extrabold text-center">
             Register
           </h1>
-          <p className="text-center mt-1 text-sm sm:text-base">create new account</p>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-6 w-full">
+          <p className="text-center mt-1 text-sm sm:text-base">
+            create new account
+          </p>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-5 mt-6 w-full"
+          >
             {errorMessage && (
               <p className="text-red-500 text-sm text-center">{errorMessage}</p>
             )}
@@ -100,7 +114,6 @@ const RegistrationForm = () => {
             </div>
             <div className="focus-within:border-2 border focus-within:border-[#D3D3FF] flex justify-center items-center gap-2 h-20  sm:h-20 w-full px-3 py-1.5 rounded-md">
               <textarea
-
                 name="bio"
                 id="bio"
                 className="outline-0 resize-none w-full text-[17px] sm:text-[16px]"
@@ -158,7 +171,9 @@ const RegistrationForm = () => {
           <div className="py-6">
             <div className="flex justify-center items-center gap-2 w-full">
               <div className="border flex-1 max-w-[120px]"></div>
-              <p className="text-sm sm:text-base whitespace-nowrap">or continue using</p>
+              <p className="text-sm sm:text-base whitespace-nowrap">
+                or continue using
+              </p>
               <div className="border flex-1 max-w-[120px]"></div>
             </div>
             <div className="mt-5">

@@ -78,6 +78,7 @@ const BannerWrapper = () => {
           }}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           loop={true}
+          speed={4000}
         >
           {carousel.map((slide) => (
             <SwiperSlide key={slide.id}>

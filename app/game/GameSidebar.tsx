@@ -22,7 +22,7 @@ const GameSidebar = ({ name, bio, id, image }: Props) => {
   return (
     <section className="bg-[#F2F2F2]">
       <div className="grid grid-cols-1 md:grid-cols-[150px_1fr] max-w-290 mx-auto font-oldstandard py-6 md:py-10 gap-5 md:gap-7 px-4 md:px-0">
-        <div className="md:h-screen bg-[#F2F2F2] rounded-md">
+        <div className="md:h-fullg bg-[#F2F2F2] rounded-md">
           <div className="flex flex-row md:flex-col flex-wrap justify-center items-center gap-4 md:space-y-10 md:gap-0 py-4 md:py-0 md:mt-8">
             <button
               onClick={() => setSelected("Home")}
@@ -43,7 +43,7 @@ const GameSidebar = ({ name, bio, id, image }: Props) => {
               Order History
             </button>
             <Logout />
-            <div className="absolute bottom-0 ">
+            <div className="absolute bottom-0 bg-[#F2F2F2] h-11">
                <Link className="flex text-[23px] hover:font-bold hover:text-[#D3D3FF] justify-center items-center gap-2" href='/'><Home />HomePage</Link>
             </div>
           </div>

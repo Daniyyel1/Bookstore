@@ -21,7 +21,7 @@ const GamePage = async () => {
       </Suspense>
       {/* {session?.user?.name} */}
 
-      <div className="bg-[#F2F2F2]">
+      <div className="bg-[#F2F2F2] h-full">
         <GameSidebar name={user?.name}   image={session.user.image} id={session.user.id} bio={user?.bio}  />
       </div>
     </>

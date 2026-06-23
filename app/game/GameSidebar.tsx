@@ -20,7 +20,7 @@ const GameSidebar = ({ name, bio, id, image }: Props) => {
   const [selected, setSelected] = useState("Home");
 
   return (
-    <section className="">
+    <section className="bg-[#F2F2F2]">
       <div className="grid grid-cols-1 md:grid-cols-[150px_1fr] max-w-290 mx-auto font-oldstandard py-6 md:py-10 gap-5 md:gap-7 px-4 md:px-0">
         <div className="md:h-screen bg-[#F2F2F2] rounded-md">
           <div className="flex flex-row md:flex-col flex-wrap justify-center items-center gap-4 md:space-y-10 md:gap-0 py-4 md:py-0 md:mt-8">
